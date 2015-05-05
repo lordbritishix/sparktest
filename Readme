@@ -1,0 +1,8 @@
+Run spark master box:
+docker run -ti -p 7077:7077 --rm -p 8080:8080 -h sparkmaster --name sparkmaster spark_master
+
+Run spark slave box:
+docker run -ti --rm -P -h sparkslave --name sparkslave --link sparkmaster:sparkmaster spark_slave
+
+Start slave:
+./bin/spark-class org.apache.spark.deploy.worker.Worker spark://sparkmaster:7077
